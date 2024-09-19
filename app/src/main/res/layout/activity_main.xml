@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
+    android:background="@mipmap/backgroundcolorblue"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -20,18 +22,19 @@
             android:layout_width="130dp"
             android:layout_height="150dp"
             android:layout_margin="10dp"
-            app:cardCornerRadius="3dp"
+            app:cardCornerRadius="10dp"
             app:cardElevation="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:background="@mipmap/backcolorblue"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:background="@drawable/circle2"
                     android:padding="20dp"
                     android:src="@drawable/schedule" />
@@ -49,7 +52,7 @@
                     android:textStyle="bold"
                     android:padding="5dp"
                     android:layout_marginTop="3dp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/white"/>
 
 
             </LinearLayout>
@@ -61,18 +64,19 @@
             android:layout_width="130dp"
             android:layout_height="150dp"
             android:layout_margin="10dp"
-            app:cardCornerRadius="3dp"
+            app:cardCornerRadius="10dp"
             app:cardElevation="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:background="@mipmap/backcolorblue"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:background="@drawable/circle2"
                     android:padding="20dp"
                     android:src="@drawable/schedule" />
@@ -90,7 +94,7 @@
                     android:textStyle="bold"
                     android:padding="5dp"
                     android:layout_marginTop="3dp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/white"/>
 
 
             </LinearLayout>
@@ -113,18 +117,19 @@
             android:layout_width="130dp"
             android:layout_height="150dp"
             android:layout_margin="10dp"
-            app:cardCornerRadius="3dp"
+            app:cardCornerRadius="10dp"
             app:cardElevation="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:background="@mipmap/backcolorblue"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:background="@drawable/circle3"
                     android:padding="20dp"
                     android:src="@drawable/notes" />
@@ -142,7 +147,7 @@
                     android:textStyle="bold"
                     android:padding="5dp"
                     android:layout_marginTop="3dp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/white"/>
 
 
             </LinearLayout>
@@ -154,18 +159,19 @@
             android:layout_width="130dp"
             android:layout_height="150dp"
             android:layout_margin="10dp"
-            app:cardCornerRadius="3dp"
+            app:cardCornerRadius="10dp"
             app:cardElevation="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:background="@mipmap/backcolorblue"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:background="@drawable/circle4"
                     android:padding="20dp"
                     android:src="@drawable/query" />
@@ -183,7 +189,7 @@
                     android:textStyle="bold"
                     android:padding="5dp"
                     android:layout_marginTop="3dp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/white"/>
 
 
             </LinearLayout>
@@ -206,18 +212,19 @@
             android:layout_width="130dp"
             android:layout_height="150dp"
             android:layout_margin="10dp"
-            app:cardCornerRadius="3dp"
+            app:cardCornerRadius="10dp"
             app:cardElevation="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:background="@mipmap/backcolorblue"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:background="@drawable/circle_green"
                     android:padding="20dp"
                     android:src="@drawable/event" />
@@ -235,7 +242,7 @@
                     android:textStyle="bold"
                     android:padding="5dp"
                     android:layout_marginTop="3dp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/white"/>
 
 
             </LinearLayout>
@@ -247,18 +254,19 @@
             android:layout_width="130dp"
             android:layout_height="150dp"
             android:layout_margin="10dp"
-            app:cardCornerRadius="3dp"
+            app:cardCornerRadius="10dp"
             app:cardElevation="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:background="@mipmap/backcolorblue"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:background="@drawable/circle5"
                     android:padding="20dp"
                     android:src="@drawable/notifications" />
@@ -276,7 +284,7 @@
                     android:textStyle="bold"
                     android:padding="5dp"
                     android:layout_marginTop="3dp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/white"/>
 
 
             </LinearLayout>
