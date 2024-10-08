@@ -5,8 +5,10 @@ pluginManagement {
                 includeGroupByRegex("com\\.android.*")
                 includeGroupByRegex("com\\.google.*")
                 includeGroupByRegex("androidx.*")
+
             }
         }
+
         mavenCentral()
         gradlePluginPortal()
     }
@@ -16,9 +18,12 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+
     }
+
 }
 
 rootProject.name = "Student Orbit App"
 include(":app")
+
  

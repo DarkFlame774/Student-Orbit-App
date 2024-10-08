@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@mipmap/backgroundcolorblue"
     tools:context=".MainActivity">
 
     <LinearLayout

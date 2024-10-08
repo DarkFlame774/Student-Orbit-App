@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "592513173919",
+    "project_id": "student-orbit-app",
+    "storage_bucket": "student-orbit-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592513173919:android:2782d5bc697b020d8f95aa",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARbdwo-jFn0l_cYbI_zdouK21LM0asxVg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
