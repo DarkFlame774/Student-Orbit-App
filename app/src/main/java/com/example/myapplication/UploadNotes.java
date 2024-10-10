@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,10 +19,15 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public class UploadNotes extends AppCompatActivity {
 
@@ -28,12 +35,14 @@ public class UploadNotes extends AppCompatActivity {
     private WebView webView;
     private TextView notesTextView;
     private EditText notesTitle;
-    private RelativeLayout uploadNotesBtnLayout;
+    private RelativeLayout uploadNotesBtn;
+    private Uri selectedFileUri;
+    private String fileName;
 
     private final ActivityResultLauncher<Intent> filePickerLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                    Uri selectedFileUri = result.getData().getData();
+                     selectedFileUri = result.getData().getData();
                     if (selectedFileUri != null) {
                         handleFile(selectedFileUri);
                     }
@@ -41,10 +50,10 @@ public class UploadNotes extends AppCompatActivity {
             });
 
     private final int REQ = 5;
-    private Uri notesData;
+
     private Bitmap bmp;
     private StorageReference storageReference;
-    private ProgressDialog pd;
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +63,25 @@ public class UploadNotes extends AppCompatActivity {
         CardView addNotes = findViewById(R.id.upload_notes);
         imageView = findViewById(R.id.imageView);
         webView = findViewById(R.id.webView);
+        uploadNotesBtn = findViewById(R.id.uploadNotes_btn);
+        notesTitle = findViewById(R.id.notes_title);
+        fileName = "File";
+        storageReference = FirebaseStorage.getInstance().getReference("uploads");
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(R.layout.progress);
+        dialog = builder.create();
 
+        uploadNotesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(selectedFileUri == null){
+                    Toast.makeText(UploadNotes.this, "No file selected", Toast.LENGTH_SHORT).show();
+                }else{
+                    setDialog(true);
+                    uploadNotes();
+                }
+            }
+        });
 
         addNotes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +91,37 @@ public class UploadNotes extends AppCompatActivity {
             }
         });
     }
+
+    private void uploadNotes() {
+            fileName = String.valueOf(notesTitle.getText());
+            StorageReference fileReference = storageReference.child( fileName + getFileExtension(selectedFileUri));
+            fileReference.putFile(selectedFileUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(UploadNotes.this, "Upload successful", Toast.LENGTH_SHORT).show();
+                            setDialog(false);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(UploadNotes.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+    }
+
+    private String getFileExtension(Uri uri) {
+        String extension = "";
+        if (uri.getLastPathSegment() != null) {
+            String[] split = uri.getLastPathSegment().split("\\.");
+            if (split.length > 1) {
+                extension = split[split.length - 1];
+            }
+        }
+        return extension;
+    }
+
 
     private void openNotesPicker() {
         Intent pickNotes = new Intent(Intent.ACTION_GET_CONTENT);
@@ -106,6 +164,11 @@ public class UploadNotes extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(this, "Error loading image", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void setDialog(boolean show){
+        if (show)dialog.show();
+        else dialog.dismiss();
     }
 }
 
