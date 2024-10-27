@@ -11,4 +11,25 @@
         <item name="android:textColor">#333333</item> <!-- Text color -->
         <item name="android:cursorVisible">true</item> <!-- Cursor visibility --><!-- Custom cursor color -->
     </style>
+    <style name="CardStyle">
+        <item name="cardCornerRadius">8dp</item>
+        <item name="cardElevation">4dp</item>
+    </style>
+
+    <style name="TextAppearance.Body" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
+    </style>
+    <style name="CardTitleText">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
+    </style>
+
+    <style name="CardContentText">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#555555</item>
+    </style>
+
+
 </resources>

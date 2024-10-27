@@ -17,19 +17,32 @@
         android:theme="@style/Theme.MyApplication.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".DetailedAttendanceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AttendanceSummaryActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".ScheduleActivity"
+            android:exported="false">
+
+        </activity>
+        <activity
             android:name=".QueryDetailActivity"
             android:exported="false" />
         <activity
             android:name=".QueryListActivity"
             android:exported="false">
-        </activity>
 
+        </activity>
         <activity
             android:name=".CreateQueryActivity"
             android:exported="false" />
         <activity
             android:name=".AttendanceActivity"
-            android:exported="false" />
+            android:exported="true"></activity>
         <activity
             android:name=".UploadNotes"
             android:exported="true" />

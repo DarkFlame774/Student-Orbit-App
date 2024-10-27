@@ -81,6 +81,8 @@ dependencies {
     implementation("com.google.firebase:firebase-database:21.0.0")
     implementation("com.google.firebase:firebase-storage:21.0.1")
     implementation("androidx.cardview:cardview:1.0.0")
+    implementation(libs.recyclerview)
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.ui.test.junit4)

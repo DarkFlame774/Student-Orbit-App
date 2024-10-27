@@ -22,6 +22,7 @@ import com.example.myapplication.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     CardView notesManager;
     CardView QueryFeature;
+    CardView ClassSchedule;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +31,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         notesManager = findViewById(R.id.Notes);
         QueryFeature = findViewById(R.id.Query);
+        ClassSchedule = findViewById(R.id.schedule);
 
         notesManager.setOnClickListener(this);
         QueryFeature.setOnClickListener(this);
+        ClassSchedule.setOnClickListener(this);
     }
 
     @Override
@@ -42,6 +45,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }else if(view.getId() == R.id.Query){
             Intent intent = new Intent(MainActivity.this,QueryListActivity.class);
+            startActivity(intent);
+        }else if(view.getId() == R.id.schedule) {
+            Intent intent = new Intent(MainActivity.this, ScheduleActivity.class);
             startActivity(intent);
         }
     }
