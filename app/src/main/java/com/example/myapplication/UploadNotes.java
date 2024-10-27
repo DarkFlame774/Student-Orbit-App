@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,7 +34,6 @@ public class UploadNotes extends AppCompatActivity {
 
     private ImageView imageView;
     private WebView webView;
-    private TextView notesTextView;
     private EditText notesTitle;
     private RelativeLayout uploadNotesBtn;
     private Uri selectedFileUri;
@@ -45,9 +45,11 @@ public class UploadNotes extends AppCompatActivity {
                      selectedFileUri = result.getData().getData();
                     if (selectedFileUri != null) {
                         handleFile(selectedFileUri);
+                        notesTitle.setText(getFileName(selectedFileUri));
                     }
                 }
             });
+
 
     private final int REQ = 5;
 
@@ -121,7 +123,21 @@ public class UploadNotes extends AppCompatActivity {
         }
         return extension;
     }
-
+    private String getFileName(Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            String[] projection = {android.provider.MediaStore.Images.Media.DISPLAY_NAME};
+            try (Cursor cursor = getContentResolver().query(uri, projection, null, null, null)) {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(0);
+                }
+            }
+        }
+        if (result != null && result.contains(".")) {
+            result = result.substring(0, result.lastIndexOf('.')); // Remove extension
+        }
+        return result;
+    }
 
     private void openNotesPicker() {
         Intent pickNotes = new Intent(Intent.ACTION_GET_CONTENT);

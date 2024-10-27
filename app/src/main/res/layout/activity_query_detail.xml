@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:padding="16dp">
+
+    <!-- Top Toolbar for Title and Actions -->
+    <!-- res/layout/activity_query_detail.xml -->
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/background_color"
+        android:padding="16dp">
+
+        <!-- Title of the Query -->
+        <TextView
+            android:id="@+id/queryTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:paddingBottom="8dp"/>
+
+        <!-- Query Description -->
+        <TextView
+            android:id="@+id/queryDescriptionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:paddingBottom="16dp"/> <!-- Replace with dynamic content -->
+
+        <!-- Divider Line -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"
+            android:layout_marginBottom="16dp"/>
+
+
+        <!-- Divider Line -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- RecyclerView for Comments -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/commentsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"/>
+
+        <!-- Comment Input Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp">
+
+            <!-- Character Counter -->
+            <TextView
+                android:id="@+id/charCounterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0/300"
+                android:textColor="?android:attr/textColorSecondary"
+                android:layout_gravity="end"/>
+
+            <!-- Comment Input Field -->
+            <EditText
+                android:id="@+id/commentEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Add a comment"
+                android:maxLength="300"
+                android:background="@drawable/edit_text_background"
+                android:padding="12dp"
+                android:inputType="textMultiLine"/>
+
+            <!-- Post Comment Button -->
+            <Button
+                android:id="@+id/postCommentButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Post"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:textColor="@android:color/white"
+                android:enabled="false"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

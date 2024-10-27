@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -103,8 +102,14 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void openDash() {
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+
+            // Start AttendanceActivity if login is successful
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+
+        /*Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
-        finish();
+        finish();*/
     }
 }

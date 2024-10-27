@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#FFFFFF"
+    tools:context=".CreateQueryActivity">
+
+    <!-- Title for Creating a Query -->
+    <TextView
+        android:id="@+id/createQueryTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create New Query"
+        android:textSize="24sp"
+        android:textColor="#333333"
+        android:fontFamily="sans-serif-medium"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp" />
+
+    <!-- Text Input for Query Title -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/titleInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/createQueryTitle"
+        android:layout_marginBottom="16dp"
+        android:hint="Query Title"
+        app:boxStrokeColor="#6200EE"
+        app:hintTextColor="@color/purple_500">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/titleEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Text Input for Query Description -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/descriptionInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleInputLayout"
+        android:layout_marginBottom="24dp"
+        android:hint="Description"
+        app:boxStrokeColor="#6200EE"
+        app:hintTextColor="@color/purple_500">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/descriptionEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:minLines="5"
+            android:gravity="start|top" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Button to Post Query -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/postButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/descriptionInputLayout"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#6200EE"
+        android:text="Post Query"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-medium" />
+
+</RelativeLayout>

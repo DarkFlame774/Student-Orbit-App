@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/background_color</item>
+        <item name="android:editTextStyle">@style/EditTextStyle</item>
+    </style>>
+    <style name="EditTextStyle">
+        <item name="android:textColor">#333333</item> <!-- Text color -->
+        <item name="android:cursorVisible">true</item> <!-- Cursor visibility --><!-- Custom cursor color -->
+    </style>
+</resources>
