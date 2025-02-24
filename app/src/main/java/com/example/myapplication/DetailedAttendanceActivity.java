@@ -1,96 +1,111 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.example.myapplication.adapters.AttendanceAdapter;
+import com.example.myapplication.models.AttendanceRecord;
+import com.google.firebase.Timestamp;
+
+import android.util.Log;
+import android.view.View;
+import android.widget.CalendarView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 
 public class DetailedAttendanceActivity extends AppCompatActivity {
 
-    private TableLayout attendanceTable;
+    private CalendarView calendarView;
+    private RecyclerView recyclerView;
+    private TextView noAttendanceMessage;
+    private AttendanceAdapter adapter;
+    private FirebaseFirestore db;
+    private static final String TAG = "DetailedAttendanceActivity";
+    private HashMap<Long, List<AttendanceRecord>> attendanceMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_attendance);
 
-        attendanceTable = findViewById(R.id.attendanceTable);
+        db = FirebaseFirestore.getInstance();
+        calendarView = findViewById(R.id.attendanceCalendarView);
+        recyclerView = findViewById(R.id.attendanceRecyclerView);
+        noAttendanceMessage = findViewById(R.id.noAttendanceMessage);
 
-        loadAttendanceData();
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new AttendanceAdapter(new ArrayList<>());
+        recyclerView.setAdapter(adapter);
+
+        fetchAttendanceRecords();
+
+        calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
+            long selectedDate = getDateInMillis(year, month, dayOfMonth);
+            displayAttendanceForDate(selectedDate);
+        });
     }
 
-    private void loadAttendanceData() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("Attendance").child("StudentID1").child("Subjects");
-
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+    private void fetchAttendanceRecords() {
+        db.collection("attendance_records").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                int rowNumber = 1;
-                for (DataSnapshot subjectSnapshot : dataSnapshot.getChildren()) {
-                    for (DataSnapshot dateSnapshot : subjectSnapshot.child("attendanceDates").getChildren()) {
-                        String date = dateSnapshot.getKey();
-                        String status = dateSnapshot.getValue(String.class);
-                        String subjectCode = subjectSnapshot.getKey();
-                        String subjectName = subjectSnapshot.child("subjectName").getValue(String.class);
-                        String time = "09:43";  // Example time, retrieve actual time as needed
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String subjectName = document.getString("subjectName");
+                        int lectureNumber = document.getLong("lectureNumber").intValue();
+                        boolean isPresent = document.getBoolean("isPresent");
+                        Timestamp timestamp = document.getTimestamp("date");
 
-                        addTableRow(rowNumber, date, "Lecture Data", subjectCode, subjectName, time, status);
-                        rowNumber++;
+                        if (timestamp != null) {
+                            Date date = timestamp.toDate();
+                            String time = new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(date);
+                            long dateInMillis = getDateInMillis(date);
+
+                            AttendanceRecord record = new AttendanceRecord(subjectName, lectureNumber, isPresent, time);
+                            attendanceMap.computeIfAbsent(dateInMillis, k -> new ArrayList<>()).add(record);
+                        }
                     }
+                } else {
+                    Log.e(TAG, "Error getting documents: ", task.getException());
                 }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Handle possible errors
             }
         });
     }
 
-    private void addTableRow(int srNo, String date, String lectureScheduled, String subjectCode, String subjectName, String time, String status) {
-        TableRow row = new TableRow(this);
+    private void displayAttendanceForDate(long selectedDate) {
+        List<AttendanceRecord> records = attendanceMap.get(selectedDate);
+        if (records != null && !records.isEmpty()) {
+            adapter = new AttendanceAdapter(records);
+            recyclerView.setAdapter(adapter);
+            recyclerView.setVisibility(View.VISIBLE);
+            noAttendanceMessage.setVisibility(View.GONE);
+        } else {
+            recyclerView.setVisibility(View.GONE);
+            noAttendanceMessage.setVisibility(View.VISIBLE);
+        }
+    }
 
-        TextView srNoView = new TextView(this);
-        srNoView.setText(String.valueOf(srNo));
-        row.addView(srNoView);
+    private long getDateInMillis(int year, int month, int day) {
+        return new java.util.GregorianCalendar(year, month, day).getTimeInMillis();
+    }
 
-        TextView dateView = new TextView(this);
-        dateView.setText(date);
-        row.addView(dateView);
-
-        TextView lectureScheduledView = new TextView(this);
-        lectureScheduledView.setText(lectureScheduled);
-        row.addView(lectureScheduledView);
-
-        TextView subjectCodeView = new TextView(this);
-        subjectCodeView.setText(subjectCode);
-        row.addView(subjectCodeView);
-
-        TextView subjectNameView = new TextView(this);
-        subjectNameView.setText(subjectName);
-        row.addView(subjectNameView);
-
-        TextView timeView = new TextView(this);
-        timeView.setText(time);
-        row.addView(timeView);
-
-        TextView statusView = new TextView(this);
-        statusView.setText(status);
-        row.addView(statusView);
-
-        attendanceTable.addView(row);
+    private long getDateInMillis(Date date) {
+        return date.getTime();
     }
 }

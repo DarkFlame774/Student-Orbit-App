@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class AttendanceActivity extends AppCompatActivity {
+/*public class AttendanceActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference attendanceRef;
     private String studentId = "studentId1"; // Example student ID
@@ -51,3 +51,4 @@ public class AttendanceActivity extends AppCompatActivity {
         });
     }
 }
+*/

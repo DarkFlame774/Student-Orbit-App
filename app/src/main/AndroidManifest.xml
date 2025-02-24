@@ -40,9 +40,11 @@
         <activity
             android:name=".CreateQueryActivity"
             android:exported="false" />
-        <activity
-            android:name=".AttendanceActivity"
-            android:exported="true"></activity>
+<!--        <activity-->
+<!--            android:name=".AttendanceActivity"-->
+<!--            android:exported="false">-->
+
+<!--        </activity>-->
         <activity
             android:name=".UploadNotes"
             android:exported="true" />

@@ -103,13 +103,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void openDash() {
 
-            // Start AttendanceActivity if login is successful
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
 
-        /*Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();*/
     }
 }

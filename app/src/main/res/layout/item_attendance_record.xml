@@ -1,28 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="16dp"
-    android:background="?android:attr/selectableItemBackground"
-    android:gravity="center_vertical">
+    android:layout_marginBottom="8dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="8dp">
 
-    <!-- Date of the Record -->
-    <TextView
-        android:id="@+id/dateText"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="October 26, 2024"
-        android:textSize="16sp"
-        android:textColor="#333" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <!-- Status Icon (Present or Absent) -->
-    <ImageView
-        android:id="@+id/statusIcon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@drawable/ic_check_circle_24"
-        app:tint="@color/primaryColor" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/textSubjectName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subject Name"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textAttendancePercentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Attendance: 90%"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

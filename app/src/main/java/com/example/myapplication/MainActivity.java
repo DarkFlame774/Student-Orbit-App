@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     CardView notesManager;
     CardView QueryFeature;
     CardView ClassSchedule;
+    CardView attendance;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +33,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         notesManager = findViewById(R.id.Notes);
         QueryFeature = findViewById(R.id.Query);
         ClassSchedule = findViewById(R.id.schedule);
+        attendance = findViewById(R.id.attendance);
 
         notesManager.setOnClickListener(this);
         QueryFeature.setOnClickListener(this);
         ClassSchedule.setOnClickListener(this);
+        attendance.setOnClickListener(this);
     }
 
     @Override
@@ -48,6 +51,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }else if(view.getId() == R.id.schedule) {
             Intent intent = new Intent(MainActivity.this, ScheduleActivity.class);
+            startActivity(intent);
+        }else if(view.getId() == R.id.attendance) {
+            Intent intent = new Intent(MainActivity.this, AttendanceSummaryActivity.class);
             startActivity(intent);
         }
     }

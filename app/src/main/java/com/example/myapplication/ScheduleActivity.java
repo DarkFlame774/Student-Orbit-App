@@ -50,6 +50,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
     private CalendarView calendarView;
     private TextView classDetails;
+    private TextView noClassesMessage;
     private RecyclerView recyclerView;
     private ScheduleAdapter adapter;
     private FirebaseFirestore db;
@@ -70,6 +71,7 @@ public class ScheduleActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ScheduleAdapter(new ArrayList<>());
         recyclerView.setAdapter(adapter);
+        noClassesMessage = findViewById(R.id.noClassesMessage);
 
         // Fetch the schedule from Firestore
         fetchSchedule();
@@ -114,11 +116,12 @@ public class ScheduleActivity extends AppCompatActivity {
             adapter = new ScheduleAdapter(classes);
             recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
+            noClassesMessage.setVisibility(View.GONE);
         } else {
             adapter = new ScheduleAdapter(new ArrayList<>());
             recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
-            // Optionally, you can display a message when no classes are found
+            noClassesMessage.setVisibility(View.VISIBLE);
         }
     }
 
